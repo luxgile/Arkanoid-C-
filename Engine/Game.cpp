@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "Colors.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -38,8 +39,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+
 }
 
 void Game::ComposeFrame()
 {
+	
 }

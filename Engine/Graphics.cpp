@@ -336,6 +336,17 @@ void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
 	}
 }
 
+void Graphics::DrawRect(Rect _rect, Color _color)
+{
+	for (int x = 0; x < _rect.size.x; x++)
+	{
+		for (int y = 0; y < _rect.size.y; y++)
+		{
+			PutPixel(_rect.MinPoint().x + x, _rect.MinPoint().y + y, _color);
+		}
+	}
+}
+
 void Graphics::DrawCircle( int x,int y,int radius,Color c )
 {
 	const int rad_sq = radius * radius;
@@ -348,6 +359,22 @@ void Graphics::DrawCircle( int x,int y,int radius,Color c )
 			if( x_diff * x_diff + y_diff * y_diff <= rad_sq )
 			{
 				PutPixel( x_loop,y_loop,c );
+			}
+		}
+	}
+}
+
+void Graphics::DrawCircle(Rect _rect, Color _color)
+{
+	const float radius = _rect.MinorSize() * 0.5f;
+	const int rad_sq = radius * radius;
+	for (int x = -radius; x < radius; x++)
+	{
+		for (int y = -radius; y < radius; y++)
+		{
+			if (x * x + y * y < rad_sq) 
+			{
+				PutPixel(_rect.position.x + x, _rect.position.y + y, _color);
 			}
 		}
 	}
