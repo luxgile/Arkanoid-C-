@@ -25,7 +25,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	player (Vec2(gfx.ScreenWidth/2, gfx.ScreenHeight * 0.9f))
 {
 }
 
@@ -39,10 +40,11 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-
+	const float dt = timer.Mark();
+	player.Update(dt, wnd.kbd);
 }
 
 void Game::ComposeFrame()
 {
-	
+	player.Draw(gfx);
 }
