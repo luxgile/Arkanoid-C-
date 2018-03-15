@@ -26,6 +26,7 @@
 #include "PlayerSlider.h"
 #include "Ball.h"
 #include "FrameTimer.h"
+#include "Mathf.h"
 
 class Game
 {
@@ -34,6 +35,11 @@ public:
 	Game( const Game& ) = delete;
 	Game& operator=( const Game& ) = delete;
 	void Go();
+
+public: 
+	static constexpr int brickNumber = 20;
+	static constexpr int brickColumns = 5;
+
 private:
 	void ComposeFrame();
 	void UpdateModel();
@@ -45,5 +51,6 @@ private:
 	Graphics gfx;
 	PlayerSlider player;
 	Ball ball;
+	Brick bricks[brickNumber];
 	FrameTimer timer;
 };

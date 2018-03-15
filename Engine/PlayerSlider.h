@@ -14,6 +14,7 @@ public:
 	void Draw(Graphics& const gfx);
 	void Move(const float _speed);
 	void Constrain();
+	const Rect GetRect();
 	float SetSpeed(Keyboard& const kbd);
 public:
 	Vec2 position;

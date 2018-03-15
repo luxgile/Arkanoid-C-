@@ -1,25 +1,41 @@
 #include "Ball.h"
 
 
-
 Ball::Ball()
 	:
 	size(Vec2(30,30)),
-	velocity(Vec2(100,100)),
+	velocity(Vec2(250,250)),
 	position(Vec2(400,400))
 {
 }
 
-bool Ball::HasCollided()
+bool Ball::HasCollided(Brick bricks[], PlayerSlider& player)
 {
+	const int arrSize = 20;
+
+	for (int i = 0; i < arrSize; i++)
+	{
+		if (bricks[i].GetRect().OnBounds(position)) 
+		{
+			bricks[i].Destroy();
+			velocity.y *= -1;
+		}
+	}
+
+	if(player.GetRect().OnBounds(position))
+	{
+		velocity.y *= -1;
+	}
+
 	return false;
 }
 
-void Ball::Update(const float dt)
+void Ball::Update(const float dt, Brick bricks[], PlayerSlider& player)
 {
 	Move(velocity * dt);
 
-	if (HasCollided()) {
+	if (HasCollided(bricks, player)) 
+	{
 		velocity = velocity * -1;
 	}
 
@@ -46,4 +62,9 @@ void Ball::Constrain()
 	if (position.y < Graphics::ScreenOffset + (size.y / 2) || position.y > Graphics::ScreenHeight - Graphics::ScreenOffset - (size.y / 2)) {
 		velocity.y *= -1;
 	}
+}
+
+const Rect Ball::GetRect() 
+{
+	return Rect(position, size);
 }

@@ -18,6 +18,11 @@ void PlayerSlider::Constrain()
 	if (position.x < 100) { position.x = 100; }
 }
 
+const Rect PlayerSlider::GetRect()
+{
+	return Rect(position, size);
+}
+
 float PlayerSlider::SetSpeed(Keyboard& const kbd)
 {
 	float speed = 0;

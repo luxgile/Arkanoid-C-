@@ -29,6 +29,17 @@ Game::Game( MainWindow& wnd )
 	player (Vec2(gfx.ScreenWidth/2, gfx.ScreenHeight * 0.9f)),
 	ball()
 {
+	for (int i = 0; i < brickNumber; i++)
+	{
+		int row = i / brickColumns;
+		int column = i % brickColumns;
+
+		float x = Mathf::Lerp(Graphics::ScreenOffset + 100, Graphics::ScreenWidth - Graphics::ScreenOffset - 100, (float)column / (float)(brickColumns-1));
+		float y = Mathf::Lerp(Graphics::ScreenHeight/2, Graphics::ScreenOffset, (float)row/(float)brickColumns);
+		Vec2 brickPos = Vec2(x, y);
+
+		bricks[i] = Brick(brickPos, Colors::Red);
+	}
 }
 
 void Game::Go()
@@ -43,7 +54,7 @@ void Game::UpdateModel()
 {
 	const float dt = timer.Mark();
 	player.Update(dt, wnd.kbd);
-	ball.Update(dt);
+	ball.Update(dt, bricks, player);
 }
 
 void Game::ComposeFrame()
@@ -52,4 +63,9 @@ void Game::ComposeFrame()
 
 	player.Draw(gfx);
 	ball.Draw(gfx);
+
+	for (int  i = 0; i < brickNumber; i++)
+	{
+		bricks[i].Draw(gfx);
+	}
 }
