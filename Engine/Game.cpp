@@ -26,7 +26,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	player (Vec2(gfx.ScreenWidth/2, gfx.ScreenHeight * 0.9f))
+	player (Vec2(gfx.ScreenWidth/2, gfx.ScreenHeight * 0.9f)),
+	ball()
 {
 }
 
@@ -42,9 +43,13 @@ void Game::UpdateModel()
 {
 	const float dt = timer.Mark();
 	player.Update(dt, wnd.kbd);
+	ball.Update(dt);
 }
 
 void Game::ComposeFrame()
 {
+	gfx.DrawOffset(10, Colors::Gray);
+
 	player.Draw(gfx);
+	ball.Draw(gfx);
 }

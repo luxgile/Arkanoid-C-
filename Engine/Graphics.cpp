@@ -380,6 +380,21 @@ void Graphics::DrawCircle(Rect _rect, Color _color)
 	}
 }
 
+void Graphics::DrawOffset(const int _width, const Color _color)
+{
+	Rect top = Rect(Vec2(ScreenWidth / 2, ScreenOffset - _width), Vec2(ScreenWidth - ScreenOffset * 2 + _width, _width));
+	DrawRect(top, _color);
+
+	Rect bot = Rect(Vec2(ScreenWidth / 2, ScreenHeight - ScreenOffset + _width), Vec2(ScreenWidth - ScreenOffset * 2 + _width, _width));
+	DrawRect(bot, _color);
+
+	Rect right = Rect(Vec2(ScreenWidth - ScreenOffset + _width, ScreenHeight / 2), Vec2(_width, ScreenHeight - ScreenOffset * 2 + _width));
+	DrawRect(right, _color);
+
+	Rect left = Rect(Vec2(ScreenOffset - _width, ScreenHeight / 2), Vec2(_width, ScreenHeight - ScreenOffset * 2 + _width));
+	DrawRect(left, _color);
+}
+
 
 //////////////////////////////////////////////////
 //           Graphics Exception

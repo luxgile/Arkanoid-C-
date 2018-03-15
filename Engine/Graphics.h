@@ -61,6 +61,7 @@ public:
 	void DrawRect(Rect _rect, Color _color);
 	void DrawCircle( int x,int y,int radius,Color c );
 	void DrawCircle(Rect _rect, Color _color);
+	void DrawOffset(const int _width, const Color _color);
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;
@@ -79,4 +80,5 @@ private:
 public:
 	static constexpr int ScreenWidth = 800;
 	static constexpr int ScreenHeight = 600;
+	static constexpr int ScreenOffset = 20;
 };
